@@ -36,10 +36,10 @@ def handle(self, client_socket):
                 if response:
                     client_socket.send(response.encode())
                     cmd_buffer = b''
-                except Exception as e:
-                    print(f'server killed {e}')
-                    self.socket.close()
-                    sys.exit()
+            except Exception as e:
+                print(f'server killed {e}')
+                self.socket.close()
+                sys.exit()
 
 def listen(self):
     self.socket.bind((self.args.target, self.args.port))
@@ -66,15 +66,15 @@ def send(self):
                 response += data.decode()
                 if recv_len < 4096:
                     break
-                if response:
-                    print(response)
-                    buffer = input('> ')
-                    buffer += '\n'
-                    self.socket.send(buffer.encode())
-        except KeyboardInterrupt:
-            print('User terminated.')
-            self.socket.close()
-            sys.exit()
+            if response:
+                print(response)
+                buffer = input('> ')
+                buffer += '\n'
+                self.socket.send(buffer.encode())
+    except KeyboardInterrupt: 
+        print('User terminated.')
+        self.socket.close()
+        sys.exit()
 
 class NetCat:
     def __init__(self, args, buffer=None)
